@@ -71,6 +71,27 @@ test("model segment can show provider-qualified ids", () => {
   assert.equal(stripAnsi(alreadyQualified.content), "openai/gpt-4.1");
 });
 
+test("cache segments keep token count and expose hit rate separately", () => {
+  const cachedTokens = renderSegment("cache_read", createSegmentContext({
+    usageStats: { input: 100, output: 0, cacheRead: 300, cacheWrite: 50, cost: 0 },
+  }));
+  const hit = renderSegment("cache_hit_rate", createSegmentContext({
+    usageStats: { input: 100, output: 0, cacheRead: 300, cacheWrite: 50, cost: 0 },
+  }));
+  const miss = renderSegment("cache_hit_rate", createSegmentContext({
+    usageStats: { input: 100, output: 0, cacheRead: 0, cacheWrite: 50, cost: 0 },
+  }));
+  const empty = renderSegment("cache_hit_rate", createSegmentContext());
+
+  assert.equal(stripAnsi(cachedTokens.content), "cache in: 300");
+  assert.equal(cachedTokens.visible, true);
+  assert.equal(stripAnsi(hit.content), "cache hit rate 66.7%");
+  assert.equal(hit.visible, true);
+  assert.equal(stripAnsi(miss.content), "cache hit rate 0.0%");
+  assert.equal(miss.visible, true);
+  assert.deepEqual(empty, { content: "", visible: false });
+});
+
 test("cost segment supports subscription display modes", () => {
   const subscription = renderSegment("cost", createSegmentContext({
     usingSubscription: true,

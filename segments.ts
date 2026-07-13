@@ -399,6 +399,23 @@ const cacheReadSegment: StatusLineSegment = {
   },
 };
 
+const cacheHitRateSegment: StatusLineSegment = {
+  id: "cache_hit_rate",
+  render(ctx) {
+    const icons = getIcons();
+    const { input, cacheRead, cacheWrite } = ctx.usageStats;
+    // `input` is the uncached portion, `cacheRead` is the cached portion,
+    // and `cacheWrite` is newly cached (but not hit) prompt input.
+    const promptTokens = input + cacheRead + cacheWrite;
+    if (!promptTokens) return { content: "", visible: false };
+
+    const hitRate = (cacheRead / promptTokens) * 100;
+    const parts = [icons.cache, "hit rate", `${hitRate.toFixed(1)}%`].filter(Boolean);
+    const content = parts.join(" ");
+    return { content: color(ctx, "tokens", content), visible: true };
+  },
+};
+
 const cacheWriteSegment: StatusLineSegment = {
   id: "cache_write",
   render(ctx) {
@@ -461,6 +478,7 @@ export const SEGMENTS: Record<BuiltinStatusLineSegmentId, StatusLineSegment> = {
   session: sessionSegment,
   hostname: hostnameSegment,
   cache_read: cacheReadSegment,
+  cache_hit_rate: cacheHitRateSegment,
   cache_write: cacheWriteSegment,
   extension_statuses: extensionStatusesSegment,
 };

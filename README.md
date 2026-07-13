@@ -87,6 +87,10 @@ Use `"fixedEditor": true` to enable it again. `"placement"` accepts `"above"` (d
 Preset selection is saved under `powerline` in the agent settings file and restored on startup.
 Run `/powerline default` to switch back to the default preset.
 
+### Segment selection
+
+Built-in segments are currently selected by preset. You can switch the whole preset with `/powerline <name>`, but there is not yet a settings option to enable or disable individual built-in segments. The `default`, `full`, and `nerd` presets include both `cache_read` and `cache_hit_rate`; `customItems` can add extension-provided statuses, but cannot toggle built-in segments.
+
 ### Custom items from extension statuses
 
 You can promote any extension status key into its own dedicated powerline item. This gives you a general way to register your own status items without changing this extension.
@@ -414,7 +418,7 @@ Use `"off"` to disable extension-owned git polling entirely and only show the br
 
 ## Segments
 
-`model` · `thinking` · `shell_mode` · `path` · `git` · `subagents` · `token_in` · `token_out` · `token_total` · `cost` · `context_pct` · `context_total` · `time_spent` · `time` · `session` · `hostname` · `cache_read` · `cache_write` · `extension_statuses`
+`model` · `thinking` · `shell_mode` · `path` · `git` · `subagents` · `token_in` · `token_out` · `token_total` · `cost` · `context_pct` · `context_total` · `time_spent` · `time` · `session` · `hostname` · `cache_read` · `cache_hit_rate` · `cache_write` · `extension_statuses`
 
 ## Separators
 

@@ -17,6 +17,7 @@
 - **Primary row placement** — Added `powerline.placement` and `/powerline placement above|below|toggle` to move the primary powerline row around the editor while keeping notifications and responsive overflow in their existing groups. Thanks to Rogerio Saulo (@rsaulo) for #77.
 
 ### Changed
+- **Cache hit-rate segment** — Added `cache_hit_rate` as a separate segment; `cache_read` continues to display the cached token count. The new segment uses cumulative prompt cache hit percentage (`cacheRead / (input + cacheRead + cacheWrite)`).
 - **Herdr and tmux scroll guidance** — Keeps fixed-editor mouse scrolling enabled by default and documents that host multiplexer scrollback needs `/powerline fixed-editor off`.
 - **Bottom jump shortcut** — Uses `ctrl+alt+g` as the default fixed-editor jump-to-bottom shortcut instead of `ctrl+shift+g`.
 - **Stash shortcut safety** — Literal `ß` is no longer consumed as stash by default; unambiguous Alt/Meta-S escape encodings still work.

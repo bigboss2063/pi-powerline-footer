@@ -44,6 +44,7 @@ export const BUILTIN_STATUS_LINE_SEGMENT_IDS = [
   "session",
   "hostname",
   "cache_read",
+  "cache_hit_rate",
   "cache_write",
   "thinking",
   "extension_statuses",
