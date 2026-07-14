@@ -78,6 +78,7 @@ let config: PowerlineConfig = {
   segmentOptions: {},
   mouseScroll: true,
   fixedEditor: true,
+  showScrollAwayHints: true,
   placement: "above",
   invalidPlacement: null,
   welcome: true,
@@ -2441,7 +2442,7 @@ export default function powerlineFooter(pi: ExtensionAPI) {
         down: resolvedShortcuts.scrollChatDown,
       },
       scrollRepaintThrottleMs: DEFAULT_SCROLL_REPAINT_THROTTLE_MS,
-      scrollAwayNavigationCard: {
+      scrollAwayNavigationCard: config.showScrollAwayHints ? {
         shortcuts: [
           scrollAwayShortcutEntry("bottom", resolvedShortcuts.jumpChatBottom),
           scrollAwayShortcutEntry("previousUser", resolvedShortcuts.jumpPreviousUserMessage),
@@ -2450,7 +2451,7 @@ export default function powerlineFooter(pi: ExtensionAPI) {
           scrollAwayShortcutEntry("nextAssistant", resolvedShortcuts.jumpNextLlmMessage),
         ].filter((shortcut): shortcut is { id: ScrollAwayShortcutId; shortcutLabel: string } => shortcut !== null),
         onClickBottom: resolvedShortcuts.jumpChatBottom ? () => jumpChatToBottom(ctx) : undefined,
-      },
+      } : undefined,
       onCopySelection: (text) => copyTextToClipboard(ctx, text),
       getShowHardwareCursor: () => typeof tui.getShowHardwareCursor === "function" && tui.getShowHardwareCursor(),
       renderCluster: (width, terminalRows) => {

@@ -12,6 +12,8 @@ export interface PowerlineConfig {
   segmentOptions: StatusLineSegmentOptions;
   mouseScroll: boolean;
   fixedEditor: boolean;
+  /** Show the shortcut card when the fixed-editor chat viewport is scrolled away from the bottom. */
+  showScrollAwayHints: boolean;
   placement: PowerlinePlacement;
   invalidPlacement: string | null;
   welcome: boolean;
@@ -261,6 +263,7 @@ export function parsePowerlineConfig(value: unknown, presets: readonly StatusLin
     segmentOptions: {},
     mouseScroll: true,
     fixedEditor: true,
+    showScrollAwayHints: true,
     placement: "above",
     invalidPlacement: null,
     welcome: true,
@@ -287,6 +290,7 @@ export function parsePowerlineConfig(value: unknown, presets: readonly StatusLin
     segmentOptions: normalizeSegmentOptions(value),
     mouseScroll: value.mouseScroll !== false,
     fixedEditor: value.fixedEditor !== false,
+    showScrollAwayHints: value.showScrollAwayHints !== false,
     placement,
     invalidPlacement,
     welcome: value.welcome !== false,

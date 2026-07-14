@@ -31,6 +31,7 @@ test("parsePowerlineConfig supports object config with custom items", () => {
   assert.deepEqual(config.invalidLayoutSegments, []);
   assert.equal(config.mouseScroll, true);
   assert.equal(config.fixedEditor, true);
+  assert.equal(config.showScrollAwayHints, true);
   assert.equal(config.placement, "above");
   assert.equal(config.invalidPlacement, null);
   assert.equal(config.welcome, true);
@@ -116,6 +117,15 @@ test("parsePowerlineConfig supports disabling fixed editor", () => {
 
   assert.equal(config.preset, "compact");
   assert.equal(config.fixedEditor, false);
+});
+
+test("parsePowerlineConfig supports hiding scroll-away hints", () => {
+  const config = parsePowerlineConfig(
+    { preset: "compact", showScrollAwayHints: false },
+    ["default", "compact"],
+  );
+
+  assert.equal(config.showScrollAwayHints, false);
 });
 
 test("parsePowerlineConfig supports welcome and legacy sharp-S toggles", () => {

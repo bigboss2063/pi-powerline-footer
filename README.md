@@ -64,6 +64,7 @@ You can also set it in the agent settings file (`~/.pi/agent/settings.json` by d
   "powerline": {
     "preset": "default",
     "fixedEditor": false,
+    "showScrollAwayHints": false,
     "placement": "below",
     "welcome": true,
     "mouseScroll": true
@@ -71,7 +72,7 @@ You can also set it in the agent settings file (`~/.pi/agent/settings.json` by d
 }
 ```
 
-Use `"fixedEditor": true` to enable it again. `"placement"` accepts `"above"` (default) or `"below"` in both fixed and regular editor modes. It moves only the primary powerline row; notifications and Pi working status stay above, while responsive overflow, bash transcript, and the last-prompt reminder stay below. Set `"welcome": false` to skip the startup welcome overlay/header while leaving powerline itself enabled. Add `"mouseScroll": false` if you want native terminal selection instead of fixed-editor mouse handling. In Herdr, tmux, and other terminal multiplexers, fixed-editor scrolling is Pi-owned while fixed-editor mode is on; keep mouse scrolling enabled for the fixed-editor viewport, or use `/powerline fixed-editor off` when you want the host multiplexer scrollback to own the experience. While fixed-editor mouse reporting is enabled, hold Shift during your terminal’s normal modifier-click to bypass capture for OSC 8 links; otherwise use `/powerline mouse-scroll off` or `/powerline fixed-editor off` for native link handling.
+Use `"fixedEditor": true` to enable it again. Set `"showScrollAwayHints": false` to keep fixed-editor scrolling without showing the `Jump to bottom` / message-navigation hint card. `"placement"` accepts `"above"` (default) or `"below"` in both fixed and regular editor modes. It moves only the primary powerline row; notifications and Pi working status stay above, while responsive overflow, bash transcript, and the last-prompt reminder stay below. Set `"welcome": false` to skip the startup welcome overlay/header while leaving powerline itself enabled. Add `"mouseScroll": false` if you want native terminal selection instead of fixed-editor mouse handling. In Herdr, tmux, and other terminal multiplexers, fixed-editor scrolling is Pi-owned while fixed-editor mode is on; keep mouse scrolling enabled for the fixed-editor viewport, or use `/powerline fixed-editor off` when you want the host multiplexer scrollback to own the experience. While fixed-editor mouse reporting is enabled, hold Shift during your terminal’s normal modifier-click to bypass capture for OSC 8 links; otherwise use `/powerline mouse-scroll off` or `/powerline fixed-editor off` for native link handling.
 
 | Preset | Description |
 |--------|-------------|
@@ -303,7 +304,7 @@ You can override shortcut keys in the agent settings file:
 }
 ```
 
-After changing bindings, run `/reload`. Invalid bindings, reserved key conflicts (like `Alt+S`), or duplicate conflicts automatically fall back to safe defaults. Set a binding to `null` or `""` to disable that action; disabled actions are not registered, do not match raw terminal fallbacks, and are omitted from the fixed-editor scroll-away hint card. `bashMode.toggleShortcut` also accepts `null` or `""` to disable the keyboard toggle while keeping `/bash-mode` available. `cmd` and `command` are accepted aliases for Pi's `super` modifier for the documented Command navigation keys; unsupported Command-letter bindings such as `cmd+c` are ignored instead of matching plain text input. Some terminals, including Ghostty, bind Command+Arrow themselves; remap those terminal keys to send `\x1b[1;9A` / `\x1b[1;9B` for chat scrolling and `\x1b[1;10A` / `\x1b[1;10B` for editor-boundary navigation if you want Pi to receive them.
+After changing bindings, run `/reload`. Invalid bindings, reserved key conflicts (like `Alt+S`), or duplicate conflicts automatically fall back to safe defaults. Set a binding to `null` or `""` to disable that action; disabled actions are not registered, do not match raw terminal fallbacks, and are omitted from the fixed-editor scroll-away hint card. To hide the entire card while keeping all shortcuts active, set `powerline.showScrollAwayHints` to `false`. `bashMode.toggleShortcut` also accepts `null` or `""` to disable the keyboard toggle while keeping `/bash-mode` available. `cmd` and `command` are accepted aliases for Pi's `super` modifier for the documented Command navigation keys; unsupported Command-letter bindings such as `cmd+c` are ignored instead of matching plain text input. Some terminals, including Ghostty, bind Command+Arrow themselves; remap those terminal keys to send `\x1b[1;9A` / `\x1b[1;9B` for chat scrolling and `\x1b[1;10A` / `\x1b[1;10B` for editor-boundary navigation if you want Pi to receive them.
 
 ### Editor autocomplete composition
 
